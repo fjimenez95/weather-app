@@ -9,6 +9,7 @@ body {
     grid-template-rows: 100px 1fr 50px;
     height: 100vh;
     font-family: 'Raleway', sans-serif;
+    gap: 5px;
 }
 
 nav, footer {
@@ -18,7 +19,12 @@ nav, footer {
 nav {
     display: flex;
     flex-direction: row;
+    padding: 20px;
+    align-items: center;
     background-color: lightblue;
+    font-family: 'Faster One', cursive;
+    font-size: 40px;
+    color: white;
 }
 
 aside {
@@ -32,7 +38,6 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 60px 60px 2fr 2fr;
-    background-color: lightpink;
     padding: 50px;
 }
 
@@ -43,10 +48,11 @@ main {
 
 #currentConditions {
     grid-column: 1 / 4;
+    font-size: 25px;
 }
 
-section > #conditionDescription {
-    font-size: 20px;
+section .title {
+    font-size: 15px;
 }
 
 #currentDegree {
