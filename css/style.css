@@ -67,3 +67,50 @@ footer {
 #title {
     
 }
+
+#currentLocation {
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+    color: blue;
+}
+
+nav > img {
+    padding: 0 30px 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        font-family: 'Helvetica';
+        font-family: 'Raleway', sans-serif;
+        gap: 5px;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 60px 60px 2fr 2fr;
+        padding: 30px;
+    }
+
+    aside > h1 {
+        font-size: 20px;
+    }
+
+    #locationName {
+        grid-column: 1 / 4;
+        font-size: 30px;
+    }
+
+    nav {
+        font-size: 20px;
+    }
+
+    nav > img {
+        padding: 0 10px 0 0;
+        width: 40px;
+    }
+
+}
