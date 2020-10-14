@@ -27,6 +27,11 @@ const $currentDegree = $('#currentDegree');
 const $conditionDescription = $('#conditionDescription');
 const $dayHigh = $('#dayHigh');
 const $dayLow = $('#dayLow');
+const $currentDescriptionTitle = $('#currentConditionTitle');
+const $currentTitle = $('#currentTitle');
+const $highTitle = $('#highTitle');
+const $lowTitle = $('#lowTitle');
+const $weatherIcon = $('#weatherIcon');
 
 // Event listeners
 $form.on('submit', handleGetData);
@@ -48,7 +53,7 @@ function handleGetData(event) {
         $.ajax(`https://us1.locationiq.com/v1/reverse.php?key=${GEO_KEY}&lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&format=json`)
         .then(function(data) {
             geoData = data;
-            defineData(false, true, true);
+            defineData(false, true, false);
         }, function(error) {
             console.log('ERROR', error);
         });
@@ -87,6 +92,7 @@ function defineData(current, geo, full) {
         state = geoData.address.state;
     }
     if(full) {
+        console.log('FULL DATA - LINE 95', fullData);
         // DEFINES dayHigh
         dayHigh = Math.round(fullData.daily[0].temp.max);
 
@@ -96,12 +102,17 @@ function defineData(current, geo, full) {
 
 }
 
-function render(currentData, fullData) {
+function render() {
     $locationName.text(`${cityName}, ${state}, ${country}`);
-    $conditionDescription.text(`${currentConditions}`)
+    $conditionDescription.text(`${currentConditions}`);
+    $currentDescriptionTitle.text(`current conditions:`);
     $currentDegree.text(`${currentWeather}\u00B0`);
+    $currentTitle.text(`currently:`);
+    $highTitle.text(`high:`);
     $dayHigh.text(`${dayHigh}\u00B0`);
+    $lowTitle.text(`low:`);
     $dayLow.text(`${dayLow}\u00B0`);
+    $weatherIcon.html(`<img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="${currentConditions}">`);
 }
 
 
