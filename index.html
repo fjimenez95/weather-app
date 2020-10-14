@@ -15,6 +15,10 @@
     <!-- Insert CSS Link -->
     <link rel="stylesheet" href="./css/style.css">
 
+    <!-- Google Fonts -->
+    <!-- RAILWAY -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
+
     <title>Weather App</title>
 </head>
 <body>
@@ -30,10 +34,26 @@
         <p>Use your current location</p>
     </aside>
     <main>
-        <div id="cityName"></div>
-        <div id="degree">B</div>
-        <div id="imageOfWeather">C</div>
-        <div id="highAndLow">D</div>
+        <div id="locationName"></div>
+
+        <section id="currentConditions">
+            <div id="title">current conditions:</div>
+            <div id="conditionDescription"></div>
+        </section>
+
+        <div id="imageOfWeather">B</div>
+ 
+        <section>
+            <div id="title">currently:</div>
+            <div id="currentDegree"></div>
+        </section>
+
+        <section>
+            <div id="title">high:</div>
+            <div id="dayHigh"></div>
+            <div id="title">low:</div>
+            <div id="dayLow"></div>
+        </section>
     </main>
     <footer>
 
