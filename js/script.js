@@ -1,7 +1,7 @@
-/* URL TO USE
-https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-*/
-// Constants and variables
+// WEATHER APPLICATION TO PROVIDE LOCAL OR USER DEFINED WEATHER DATA
+// FREDDY JIMENEZ
+
+// ***** CONSTANTS AND VARIABLES *****
 
 const API_KEY = '80717146996368e81a2d42142e5a5b4f';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/';
@@ -17,8 +17,10 @@ let dayLow;
 let currentData;
 let geoData;
 let fullData;
+let currentLon;
+let currentLat;
 
-// Cached element references
+// ***** CACHED ELEMENT REFERENCES *****
 
 const $form = $('form');
 const $input = $('input[type="text"]');
@@ -32,35 +34,47 @@ const $currentTitle = $('#currentTitle');
 const $highTitle = $('#highTitle');
 const $lowTitle = $('#lowTitle');
 const $weatherIcon = $('#weatherIcon');
+const $currentLocation = $('#currentLocation');
 
-// Event listeners
+// ***** EVENT LISTENERS *****
 $form.on('submit', handleGetData);
-// Functions
+$currentLocation.on('click', getLocation);
+
+// ***** FUNCTIONS *****
 
 function handleGetData(event) {
-    // HANDLE INPUT DATA
-    // Remove default
-    event.preventDefault();
-    cityNameInput = $input.val();
+    // CHECK IF USER SELECTED CURRENT LOCATION OR PROVIDED AN INPUT        
+    if (currentLat) {
+    // CALLS GEO PLUGIN TO CHECK CITY IF CURRENT LOCATION IS SELECTED
+    cityNameInput = geoplugin_city();    
+    } else {
+        // PREVENTS PAGE FROM REFRESHING AFTER SELECTING SUBMIT ON FORM
+        event.preventDefault();
+        // HANDLE INPUT DATA
+        cityNameInput = $input.val();
+    }
 
-    // GET CURRENT DATA - Looks up current data
+    // GET CURRENT DATA - Looks up current weather data by city name and provides lat/lon for GeoData call and FullData call
     $.ajax(`${BASE_URL}weather?q=${cityNameInput}&appid=${API_KEY}&units=imperial`)
     .then(function(data) {
         currentData = data;
+        // Defines variables from this dataset in defineData functions
         defineData(true, false, false);
 
-        // GET GEO DATA - Gets city name
+        // GET GEO DATA - Gets city and state name
         $.ajax(`https://us1.locationiq.com/v1/reverse.php?key=${GEO_KEY}&lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&format=json`)
         .then(function(data) {
             geoData = data;
+            // Defines variables from this dataset in defineData functions
             defineData(false, true, false);
         }, function(error) {
             console.log('ERROR', error);
         });
 
-        // GET FULL DATA - Looks up full data
+        // GET FULL DATA - Looks up full weather data (current, daily, hourly) based on lat/lon
         $.ajax(`${BASE_URL}onecall?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&exclude=minutely,alerts&appid=${API_KEY}&units=imperial`).then(function(data) {
             fullData = data;
+            // Defines variables from this dataset in defineData functions
             defineData(false, false, true);
             // RENDER
             render();
@@ -103,6 +117,11 @@ function defineData(current, geo, full) {
 }
 
 function render() {
+    // PROVIDES ERROR IF NO CITY/STATE COMES BACK FROM API CALL
+    if (!cityName || !state) {
+    $locationName.text(`excuse us - there was a technical error. please try again :(`);
+    } else {
+    // FULL RENDER IF CITY/STATE IS PROVIDED BACK FROM API CALL
     $locationName.text(`${cityName}, ${state}, ${country}`);
     $conditionDescription.text(`${currentConditions}`);
     $currentDescriptionTitle.text(`current conditions:`);
@@ -113,6 +132,12 @@ function render() {
     $lowTitle.text(`low:`);
     $dayLow.text(`${dayLow}\u00B0`);
     $weatherIcon.html(`<img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="${currentConditions}">`);
+    }
 }
 
-
+// OBTAINS CURRENT LOCATION OF USER
+function getLocation() {
+    currentLat = geoplugin_latitude();
+    currentLon = geoplugin_longitude();
+    handleGetData();
+}
