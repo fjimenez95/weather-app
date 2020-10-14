@@ -20,13 +20,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
     <!-- FASTER ONE -->
     <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
 
     <title>Weather App</title>
 </head>
 <body>
     <nav>
         <img src="./imgs/logo.png" alt="logo">
-        QUICKWEATHER.USA
+        <div id="quickweathertitle">QUICKWEATHER.USA</div>
     </nav>
     <aside>
         <h1>What's the weather near you?</h1>
@@ -34,7 +35,9 @@
             <input type="text" placeholder="Search by city">
             <input type="submit" value="Search">
         </form>
-        <p>Use your current location</p>
+        </br>
+        or
+        <p id="currentLocation">Use your current location</p>
     </aside>
     <main>
         <div id="locationName"><-- search for weather near you :-)</div>
