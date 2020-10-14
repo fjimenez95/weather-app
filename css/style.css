@@ -8,6 +8,7 @@ body {
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 100px 1fr 50px;
     height: 100vh;
+    font-family: 'Raleway', sans-serif;
 }
 
 nav, footer {
@@ -30,16 +31,33 @@ aside {
 main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-rows: 60px 60px 2fr 2fr;
     background-color: lightpink;
     padding: 50px;
 }
 
-#cityName {
+#locationName {
     grid-column: 1 / 4;
+    font-size: 30px;
+}
+
+#currentConditions {
+    grid-column: 1 / 4;
+}
+
+section > #conditionDescription {
+    font-size: 20px;
+}
+
+#currentDegree {
+    font-size: 60px;
 }
 
 footer {
     display: flex;
     background-color: lightgoldenrodyellow;
+}
+
+#title {
+    
 }
