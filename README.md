@@ -13,7 +13,7 @@ A simple solution for displaying weather for users in their current location or 
 ## SCREENSHOTS
 
 ### COMPLETED PROJECT
-![image](https://imgur.com/rh6GgBB)
+![image](https://i.imgur.com/rh6GgBB.png)
 
 ### FUTURE ENHANCEMENTS
 - Adding 7-day forecast
