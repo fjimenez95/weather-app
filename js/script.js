@@ -3,9 +3,14 @@
 
 // ***** CONSTANTS AND VARIABLES *****
 
-const API_KEY = '80717146996368e81a2d42142e5a5b4f';
+const {
+    openWeatherAPIKey,
+    geoLocationAPIKey,
+} = CONFIG;
+
+const API_KEY = openWeatherAPIKey;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/';
-const GEO_KEY = 'pk.c59b3ca87210dbbb48916f9102e70a8a';
+const GEO_KEY = geoLocationAPIKey;
 let cityNameInput = '';
 let cityName = '';
 let state = '';
@@ -43,6 +48,9 @@ $currentLocation.on('click', getLocation);
 // ***** FUNCTIONS *****
 
 function handleGetData(event) {
+    if (event) {
+        event.preventDefault();
+    }
     // CHECK IF USER SELECTED CURRENT LOCATION OR PROVIDED AN INPUT        
     if (currentLat) {
     // CALLS GEO PLUGIN TO CHECK CITY IF CURRENT LOCATION IS SELECTED
