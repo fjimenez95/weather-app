@@ -61,7 +61,7 @@ section .title {
 
 footer {
     display: flex;
-    background-color: lightgoldenrodyellow;
+    background-color: lightblue;
 }
 
 #title {
